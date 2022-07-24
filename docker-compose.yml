@@ -1,0 +1,26 @@
+version: '3.7'
+
+services:
+  advents_notebook_service:
+    build: ./ # относительный путь до папки  файлами. откуда compose будет брать их чтобы сбилдить
+    container_name: advents_notebook_container
+    tty: true # this fucker is a must for container to run - why?
+    restart: unless-stopped
+    environment:
+      - PASSWORD=password
+    ports:
+      - 8889:8889 # binds to docker internal service to localhost:8889
+    volumes:
+      - ./:/adventsofcode
+    command: conda run -n advents_env --no-capture-output jupyter-notebook --port=8889 --NotebookApp.password=${hascode} --allow-root #chmod -R 777 /opt/conda/envs/ &&
+    
+
+# volumes:
+#     mongodb_api:
+#     mongo_dumps:
+
+
+
+
+
+ 
